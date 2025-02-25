@@ -4,7 +4,7 @@
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <title>Chevrolet</title>
- <style>
+ <style> 
  body {
  font-family: Arial, sans-serif;
  margin: 0;
@@ -16,12 +16,12 @@
  padding: 20px;
  }
  .titulo {
- color: #ffcc00;
+ color: #00bfff; /* Azul claro */
  font-size: 24px;
  font-weight: bold;
  }
  .subtitulo {
- color: white;
+ color: #ff6600; /* Naranja */
  }
  .contenedor {
  display: flex;
@@ -36,7 +36,7 @@
  }
  .boton {
  display: inline-block;
- background-color: #0072CE;
+ background-color: #006400; /* Verde oscuro */
  color: white;
  padding: 10px 20px;
  text-decoration: none;
@@ -44,7 +44,7 @@
  margin-bottom: 20px;
  }
  .boton:hover {
- background-color: #005bb5;
+ background-color: #004d00;
  }
  iframe {
  width: 500px;
@@ -57,8 +57,8 @@
  <header>
  <h1 class="titulo">Programación Web I PRIM25</h1>
  <h2 class="subtitulo">Evaluación práctica Parcial 1</h2>
- <p style="color: red">Profesora: M.C. Imelda Deyanira Hernández Martínez</p>
- <p style="color: yellow">Nombre del alumno:Zapata Nery</p>
+ <p style="color: purple">Profesora: M.C. Imelda Deyanira Hernández Martínez</p>
+ <p style="color: #7fff00">Nombre del alumno: Zapata Nery</p>
  </header>
  <h2>Haz clic en el logo para cargar la página oficial de Chevrolet</h2>
  <img style="width: 300px; height: 300px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:
@@ -71,7 +71,7 @@ ANd9GcSOq1tNKRrgaMOMKUGDn77y1utbhW9PFlwHIg&s" alt="Haz clic aquí" onclick="carg
  document.getElementById('iframe-container').src = "https://www.chevroletherreramotors.com.mx/";
  }
  </script>
- <button style="background-color: red; width: 200px; color: white" onclick="irAOtraPagina()">Página oficial Chevrolet</button>
+ <button class="boton" onclick="irAOtraPagina()">Página oficial Chevrolet</button>
 
  <script>
  function irAOtraPagina() {
