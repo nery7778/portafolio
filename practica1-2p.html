@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formularios en HTML</title>
+    <style>
+        body {
+            background-color: whitesmoke;
+            margin: 20px;
+            text-align: center;
+        }
+
+        table {
+            margin-top: 20px;
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            text-align: left;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Registro en la Politécnica de S.L.P</h1>
+        <h2>Inscripciones</h2>
+    </header>
+
+    <form>
+        <table>
+            <tr>
+                <th>Nombre de usuario:</th>
+                <td><input type="text" name="username" id="username" placeholder="Nombre de usuario" size="15" maxlength="20" title="Nombre de usuario" /></td>
+            </tr>
+            <tr>
+                <th>Apellido paterno:</th>
+                <td><input type="text" name="apellido_paterno" id="apellido_paterno" placeholder="Apellido paterno" size="10" maxlength="20" title="Apellido paterno" /></td>
+            </tr>
+            <tr>
+                <th>Apellido materno:</th>
+                <td><input type="text" name="apellido_materno" id="apellido_materno" placeholder="Apellido materno" size="10" maxlength="20" title="Apellido materno" /></td>
+            </tr>
+            <tr>
+                <th>Contraseña:</th>
+                <td><input type="password" name="password" id="password" placeholder="Contraseña" size="10" maxlength="20" title="Contraseña" /></td>
+            </tr>
+            <tr>
+                <th>Fecha y hora de registro:</th>
+                <td><label for="fechahora">Fecha y hora:</label>
+                    <input type="datetime-local" name="fechahora" id="fechahora"></td>
+            </tr>
+        </table>
+
+        <!-- Nueva tabla de dirección -->
+        <h3>Datos de Dirección</h3>
+        <table>
+            <tr>
+                <th>País:</th>
+                <td>
+                    <select name="pais" id="pais">
+                        <option value="mexico">México</option>
+                        <option value="spain">España</option>
+                        <option value="usa">Estados Unidos</option>
+                        <option value="canada">Canadá</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>Ciudad:</th>
+                <td>
+                    <select name="ciudad" id="ciudad">
+                        <option value="sanluis">San Luis Potosí</option>
+                        <option value="cdmx">Ciudad de México</option>
+                        <option value="barcelona">Barcelona</option>
+                        <option value="newyork">Nueva York</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>Calle:</th>
+                <td><input type="text" name="calle" id="calle" placeholder="Calle" size="30" maxlength="50" title="Calle" /></td>
+            </tr>
+            <tr>
+                <th>Número de casa:</th>
+                <td><input type="text" name="numero_casa" id="numero_casa" placeholder="Número de casa" size="5" maxlength="10" title="Número de casa" /></td>
+            </tr>
+            <tr>
+                <th>Colonia:</th>
+                <td><input type="text" name="colonia" id="colonia" placeholder="Colonia" size="20" maxlength="30" title="Colonia" /></td>
+            </tr>
+            <tr>
+                <th>Email:</th>
+                <td><input type="email" name="email" id="email" placeholder="Correo electrónico" size="30" maxlength="50" title="Correo electrónico" /></td>
+            </tr>
+            <tr>
+                <th>Código Postal:</th>
+                <td><input type="text" name="codigo_postal" id="codigo_postal" placeholder="Código postal" size="10" maxlength="10" title="Código postal" /></td>
+            </tr>
+            <tr>
+                <th>Acepta los términos:</th>
+                <td><input type="checkbox" name="terminos" id="terminos" /> Acepto los términos y condiciones</td>
+            </tr>
+        </table>
+
+        <button type="submit">Registrar</button>
+    </form>
+</div>
+
+</body>
+</html>
