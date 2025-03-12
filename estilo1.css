@@ -1,0 +1,22 @@
+ul{
+	list-style-type: none;
+	width:30%;
+	margin: 0px;
+	padding: 0px;
+}
+
+li a{
+	background-color: red;
+	color: white;
+	display:block;
+	padding: 16px;
+	text-decoration: none;
+}
+
+li a:hover{
+	background-color: pink;
+}
+li .activo{
+	background-color: rgb(235, 135, 227);
+	color: white;
+}
