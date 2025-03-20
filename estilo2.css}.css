@@ -163,10 +163,178 @@ form button {
     border-radius: 5px;
 }
 
+/* Sección de Iniciar sesión */
+#login-form {
+    display: none; /* Oculto inicialmente */
+    padding: 50px 20px;
+    background-color: #fff;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 50%;
+    margin: 20px auto;
+}
+
+#login-form h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #c59d5f; /* Dorado suave */
+}
+
+#login-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+#login-form label {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    color: #2e2e2e; /* Gris oscuro */
+}
+
+#login-form input {
+    width: 80%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1.1em;
+}
+
+#login-form button {
+    padding: 10px 20px;
+    background-color: #c59d5f;
+    color: white;
+    font-size: 1.1em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#login-form #toggle-password {
+    background: none;
+    border: none;
+    color: #c59d5f;
+    font-size: 1em;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+/* Sección de Compras */
+#compras {
+    padding: 50px 20px;
+    background-color: #fff;
+    text-align: center;
+}
+
+#compras h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.compras {
+    display: flex;
+    justify-content: space-around;
+    gap: 30px;
+}
+
+.compra {
+    width: 30%;
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.compra h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.compra p {
+    font-size: 1.1em;
+}
+
+.compra button {
+    padding: 10px 20px;
+    background-color: #c59d5f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+}
+
 /* Footer */
 footer {
     background-color: #c59d5f;
     color: white;
     text-align: center;
     padding: 20px;
+}
+ /* Estilos para el carrito de compras */
+#carrito {
+    padding: 50px 20px;
+    background-color: #fff;
+    text-align: center;
+}
+
+#carrito h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.carrito {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.carrito-item {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.carrito-item img {
+    width: 80px; /* Ajusta el tamaño de las imágenes */
+    height: auto;
+    margin-right: 20px;
+}
+
+.carrito-item h3 {
+    font-size: 1.5em;
+}
+
+.carrito-item p {
+    font-size: 1.1em;
+}
+
+.carrito-item button {
+    padding: 10px 20px;
+    background-color: #c59d5f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+}
+
+/* Botón de finalizar compra */
+#finalizar-compra {
+    margin-top: 30px;
+    padding: 15px 30px;
+    background-color: #c59d5f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+    cursor: pointer;
 }
