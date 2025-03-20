@@ -18,7 +18,8 @@
                 <li><a href="#productos">Productos</a></li>
                 <li><a href="#historia">Historia</a></li>
                 <li><a href="#contacto">Contacto</a></li>
-                <li><a href="#ubicacion">Ubicación</a></li>
+                <li><a href="#carrito">Carrito</a></li>
+                <li><a href="#login-form" onclick="toggleLoginForm()">Iniciar sesión</a></li>
             </ul>
         </nav>
     </header>
@@ -37,18 +38,34 @@
             <div class="producto">
                 <img src="añejo2.jpeg" alt="Tequila Zafren Añejo">
                 <h3>Tequila Zafren Añejo</h3>
-                <p>Una mezcla única, envejecida en barricas de roble.</p>
+                <p>Una mezcla única, envejecida en barricas de roble para obtener un sabor suave y profundo.</p>
+                <p><strong>Precio: $600</strong></p>
+                <button onclick="agregarAlCarrito('Tequila Zafren Añejo', 'añejo2.jpeg', 600)">Agregar al carrito</button>
             </div>
+
             <div class="producto">
                 <img src="cristalino.webp" alt="Tequila Zafren Blanco">
                 <h3>Tequila Zafren Blanco</h3>
-                <p>El sabor puro de la agave, fresco y equilibrado.</p>
+                <p>El sabor puro de la agave, fresco, equilibrado y perfecto para cualquier ocasión.</p>
+                <p><strong>Precio: $500</strong></p>
+                <button onclick="agregarAlCarrito('Tequila Zafren Blanco', 'cristalino.webp', 500)">Agregar al carrito</button>
             </div>
+
             <div class="producto">
                 <img src="reposado.jpg" alt="Tequila Zafren Reposado">
                 <h3>Tequila Zafren Reposado</h3>
-                <p>Reposado en barricas para una experiencia suave.</p>
+                <p>Reposado en barricas de roble para una experiencia suave con notas de vainilla y madera.</p>
+                <p><strong>Precio: $550</strong></p>
+                <button onclick="agregarAlCarrito('Tequila Zafren Reposado', 'reposado.jpg', 550)">Agregar al carrito</button>
             </div>
+        </div>
+    </section>
+
+    <!-- Sección Carrito de Compras -->
+    <section id="carrito">
+        <h2>Tu Carrito</h2>
+        <div id="contenidoCarrito">
+            <p>Tu carrito está vacío.</p>
         </div>
     </section>
 
@@ -62,6 +79,8 @@
     <section id="contacto">
         <h2>Contáctanos</h2>
         <p>¿Tienes alguna pregunta o quieres saber más sobre nuestros productos? ¡Estamos aquí para ayudarte!</p>
+        <p>Llena el formulario a continuación y nos pondremos en contacto contigo lo antes posible.</p>
+        
         <form>
             <label for="name">Nombre</label>
             <input type="text" id="name" name="name">
@@ -75,23 +94,94 @@
             <button type="submit">Enviar</button>
         </form>
 
-        <p>O si prefieres, puedes llamarnos o escribirnos al correo:</p>
-        <p><strong>Teléfono:</strong> +52 1 800 123 4567</p>
-        <p><strong>Correo Electrónico:</strong> <a href="mailto:contacto@zafren.com">contacto@zafren.com</a></p>
-    </section>
-
-    <!-- Sección Ubicación -->
-    <section id="ubicacion">
-        <h2>Ubicación</h2>
-        <p>Visítanos en nuestra sede, ubicada en Cerritos, San Luis Potosí.</p>
-        <p>Dirección: <strong>Jdn. Hidalgo s20, Zona Centro, 79440 Cerritos, S.L.P.</strong></p>
-        
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3687.844927366591!2d-100.28650827850508!3d22.434861784510133!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x867ff31fe30504a7%3A0x58ae697c93e9d947!2sJdn.%20Hidalgo%20s20%2C%20Zona%20Centro%2C%2079440%20Cerritos%2C%20S.L.P.!5e0!3m2!1sen!2smx!4v1742435128220!5m2!1sen!2smx" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <p>También puedes contactarnos directamente a través de nuestras redes sociales:</p>
+        <div class="social-media">
+            <a href="#">Facebook</a> | <a href="#">Instagram</a> | <a href="#">Twitter</a>
+        </div>
     </section>
 
     <footer>
         <p>&copy; 2025 Zafren Tequila | Todos los derechos reservados</p>
     </footer>
+
+    <!-- Sección de Iniciar sesión -->
+    <section id="login-form" style="display: none;">
+        <h2>Iniciar sesión</h2>
+        <form onsubmit="return iniciarSesion()">
+            <label for="username">Usuario</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Contraseña</label>
+            <input type="password" id="password" name="password" required>
+
+            <!-- Campos adicionales -->
+            <label for="zip">Código Postal (ZIP)</label>
+            <input type="text" id="zip" name="zip" required>
+
+            <label for="dob">Fecha de Nacimiento</label>
+            <input type="date" id="dob" name="dob" required>
+
+            <label for="bank">Información Bancaria</label>
+            <textarea id="bank" name="bank" placeholder="Ingrese su información bancaria (opcional)"></textarea>
+
+            <button type="submit">Iniciar sesión</button>
+            <button type="button" onclick="toggleLoginForm()">Cerrar</button>
+        </form>
+    </section>
+
+    <script>
+        // Estructura del carrito
+        var carrito = [];
+
+        // Función para añadir productos al carrito
+        function agregarAlCarrito(producto, imagen, precio) {
+            carrito.push({ producto: producto, imagen: imagen, precio: precio });
+            actualizarCarrito();
+        }
+
+        // Función para actualizar el carrito y mostrar los productos
+        function actualizarCarrito() {
+            var carritoContenido = document.getElementById("contenidoCarrito");
+            carritoContenido.innerHTML = ""; // Limpiar el contenido anterior
+
+            if (carrito.length > 0) {
+                carrito.forEach(item => {
+                    carritoContenido.innerHTML += "<div class='carrito-item'><img src='" + item.imagen + "' alt='" + item.producto + "' class='carrito-imagen'><p>" + item.producto + "</p><p>Precio: $" + item.precio + "</p></div>";
+                });
+            } else {
+                carritoContenido.innerHTML = "<p>Tu carrito está vacío.</p>";
+            }
+        }
+
+        // Función para mostrar u ocultar el formulario de inicio de sesión
+        function toggleLoginForm() {
+            var loginForm = document.getElementById("login-form");
+            if (loginForm.style.display === "none") {
+                loginForm.style.display = "block";
+            } else {
+                loginForm.style.display = "none";
+            }
+        }
+
+        // Función para simular inicio de sesión
+        function iniciarSesion() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            var zip = document.getElementById("zip").value;
+            var dob = document.getElementById("dob").value;
+            var bank = document.getElementById("bank").value;
+
+            // Aquí iría la validación real con una base de datos
+            if (username === "usuario" && password === "contraseña") {
+                alert("¡Bienvenido, " + username + "!\n" + "Código Postal: " + zip + "\nFecha de Nacimiento: " + dob + "\nInformación Bancaria: " + bank);
+                toggleLoginForm();
+                return false; // Evita el envío real del formulario
+            } else {
+                alert("Nombre de usuario o contraseña incorrectos.");
+                return false; // Evita el envío real del formulario
+            }
+        }
+    </script>
 
 </body>
 </html>
