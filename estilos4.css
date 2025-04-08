@@ -1,0 +1,64 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #e6ccff; /* Violeta claro */
+    padding: 20px;
+  }
+  
+  h1, h2 {
+    color: #333;
+  }
+  
+  /* Estilo del botón */
+  .boton input[type="button"],
+  .boton label {
+    background-color: #7b4db6;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    display: inline-block;
+  }
+  
+  /* Ocultamos el botón de tipo input */
+  .boton input[type="button"] {
+    display: none;
+  }
+  
+  /* Galería en fila horizontal */
+  .galeria {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: nowrap;
+  }
+  
+  .galeria img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 10px dotted #5e35b1; /* Borde punteado violeta oscuro */
+    transition: all 0.3s ease;
+  }
+  
+  
+  .boton:hover + .galeria {
+    display: none;
+  }
+  
+  
+  .boton:hover label {
+    background-color: #b339d4;
+    transform: scale(1.05);
+  }
+  
+  
+  .galeria img:hover {
+    transform: scale(1.05);
+  }
+  
