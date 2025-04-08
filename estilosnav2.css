@@ -1,0 +1,59 @@
+/* Barra lateral */
+ul {
+	list-style-type: none;
+	width: 22%;
+	margin: 0;
+	padding: 0;
+	height: 80%;
+	background-color: #6c5ce7;
+	position: fixed;
+}
+
+/* Enlaces de la barra */
+li a {
+	background-color: #6c5ce7;
+	color: white;
+	display: block;
+	padding: 16px;
+	text-decoration: none;
+	font-family: 'Dancing Script', cursive;
+	font-size: 22px;
+}
+
+li a:hover {
+	background-color: #a29bfe;
+}
+
+li .activo {
+	background-color: #341f97;
+	color: white;
+}
+
+/* Contenido principal */
+.capa1 {
+	margin-left: 25%;
+	padding: 12px;
+}
+
+/* Título principal */
+h1 {
+	font-family: 'Dancing Script', cursive;
+	font-size: 40px;
+	text-align: center;
+	color: #2d3436;
+}
+
+/* Subtítulos */
+h2 {
+	font-family: 'Dancing Script', cursive;
+	font-size: 30px;
+	color: #2d3436;
+}
+
+/* Párrafos */
+p, .t2 {
+	font-family: 'Dancing Script', cursive;
+	font-size: 22px;
+	text-align: justify;
+	color: #2d3436;
+}
