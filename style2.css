@@ -9,7 +9,7 @@
 	min-height: 100vh;
 }
 .encabezado{
-	background:lightpink;
+	background:darkblue;
 	color: white;
 	padding: 25px;
 	margin: 5px;
@@ -30,7 +30,7 @@
 .pie{
 	padding: 10px;
 	border: 1px lightgray;
-	background: lightblue;
+	background: red;
 }
 @media(max-width:500px){
 	.contenido{
