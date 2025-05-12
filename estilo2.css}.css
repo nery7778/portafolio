@@ -338,3 +338,32 @@ footer {
     font-size: 1.2em;
     cursor: pointer;
 }
+#cotizacion {
+    padding: 50px 20px;
+    background-color: #e8e8e8;
+    text-align: center;
+}
+
+#cotizacion form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#cotizacion form label,
+#cotizacion form input,
+#cotizacion form select,
+#cotizacion form button {
+    width: 80%;
+    margin-bottom: 15px;
+    font-size: 1.1em;
+}
+
+#cotizacion form button {
+    background-color: #c59d5f;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
