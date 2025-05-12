@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zafren Tequila</title>
-    <link rel="stylesheet" href="estilo2.css}.css">
+    <link rel="stylesheet" href="estilo2.css}.CSS">
 </head>
 <body>
 
@@ -104,7 +104,32 @@
             <h3>Encuéntranos en:</h3>
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14784.379661435958!2d-101.0027073180201!3d22.12235654158077!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x842a9f5412c6b56f%3A0xe1b3dea4c6aa1c03!2sUniversidad%20Politécnica%20de%20San%20Luis%20Potosí!5e0!3m2!1sen!2smx!4v1744131647259!5m2!1sen!2smx" width="600" height="450" style="border:0; max-width: 100%;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
-    </section>
+    </section><!-- Sección Cotización -->
+<section id="cotizacion">
+    <h2>Solicita tu Cotización</h2>
+    <form onsubmit="return calcularCotizacion()">
+        <label for="cantidad">Cantidad de botellas</label>
+        <input type="number" id="cantidad" name="cantidad" required min="1">
+
+        <label for="tipo">Tipo de tequila</label>
+        <select id="tipo" name="tipo">
+            <option value="añejo">Añejo - $600</option>
+            <option value="blanco">Blanco - $500</option>
+            <option value="reposado">Reposado - $550</option>
+        </select>
+
+        <label for="envio">¿Deseas envío?</label>
+        <select id="envio" name="envio">
+            <option value="si">Sí (costo adicional $150)</option>
+            <option value="no">No</option>
+        </select>
+
+        <button type="submit">Calcular cotización</button>
+    </form>
+
+    <div id="resultadoCotizacion" style="margin-top: 1em;"></div>
+</section>
+
 
     <footer>
         <p>&copy; 2025 Zafren Tequila | Todos los derechos reservados</p>
@@ -178,6 +203,23 @@
             }
         }
     </script>
+<script>
+    function calcularCotizacion() {
+        const cantidad = parseInt(document.getElementById("cantidad").value);
+        const tipo = document.getElementById("tipo").value;
+        const envio = document.getElementById("envio").value;
 
-</body>
-</html>
+        let precioUnitario = 0;
+        if (tipo === "añejo") precioUnitario = 600;
+        else if (tipo === "blanco") precioUnitario = 500;
+        else if (tipo === "reposado") precioUnitario = 550;
+
+        let total = cantidad * precioUnitario;
+        if (envio === "si") total += 150;
+
+        const resultado = document.getElementById("resultadoCotizacion");
+        resultado.innerHTML = `<p><strong>Total a pagar:</strong> $${total}</p>`;
+        return false; // Evita que se recargue la página
+    }
+</script>
+
