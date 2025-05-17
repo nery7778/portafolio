@@ -1,0 +1,35 @@
+body {
+  margin: 20px;
+  background: #1c1c1c;
+  font-family: 'Roboto', sans-serif;
+  color: white;
+}
+h1 {
+  color: gold;
+}
+.question {
+  background: #2e2e2e;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+button {
+  margin-top: 20px;
+  padding: 10px 15px;
+  background-color: gold;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+#score {
+  font-size: 20px;
+  font-weight: bold;
+  color: gold;
+  margin: 20px 0;
+}
+canvas {
+  max-width: 600px;
+  margin-top: 20px;
+}
