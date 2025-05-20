@@ -14,6 +14,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-direction: row;
 }
 
 header .logo img {
@@ -25,6 +26,7 @@ nav ul {
     padding: 0;
     margin: 0;
     display: flex;
+    flex-direction: row;
 }
 
 nav ul li {
@@ -51,13 +53,13 @@ nav ul li a {
 .hero h1 {
     font-size: 3em;
     margin-bottom: 20px;
-    color: white; /* Color dorado para el título */
+    color: white;
 }
 
 .hero p {
     font-size: 1.2em;
     margin-bottom: 30px;
-    color: whitesmoke; /* Color cálido, combinando con la temática de tequila */
+    color: whitesmoke;
 }
 
 .hero button a {
@@ -85,6 +87,7 @@ nav ul li a {
     display: flex;
     justify-content: space-around;
     gap: 30px;
+    flex-direction: row;
 }
 
 .producto {
@@ -145,7 +148,8 @@ form label {
     margin-bottom: 10px;
 }
 
-form input, form textarea {
+form input,
+form textarea {
     width: 80%;
     padding: 10px;
     margin-bottom: 20px;
@@ -165,7 +169,7 @@ form button {
 
 /* Sección de Iniciar sesión */
 #login-form {
-    display: none; /* Oculto inicialmente */
+    display: none;
     padding: 50px 20px;
     background-color: #fff;
     text-align: center;
@@ -178,7 +182,7 @@ form button {
 #login-form h2 {
     font-size: 2.5em;
     margin-bottom: 20px;
-    color: #c59d5f; /* Dorado suave */
+    color: #c59d5f;
 }
 
 #login-form form {
@@ -191,7 +195,7 @@ form button {
 #login-form label {
     font-size: 1.2em;
     margin-bottom: 10px;
-    color: #2e2e2e; /* Gris oscuro */
+    color: #2e2e2e;
 }
 
 #login-form input {
@@ -237,6 +241,7 @@ form button {
     display: flex;
     justify-content: space-around;
     gap: 30px;
+    flex-direction: row;
 }
 
 .compra {
@@ -273,7 +278,8 @@ footer {
     text-align: center;
     padding: 20px;
 }
- /* Estilos para el carrito de compras */
+
+/* Estilos para el carrito de compras */
 #carrito {
     padding: 50px 20px;
     background-color: #fff;
@@ -295,6 +301,7 @@ footer {
 .carrito-item {
     width: 80%;
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
     background-color: #f2f2f2;
@@ -304,7 +311,7 @@ footer {
 }
 
 .carrito-item img {
-    width: 80px; 
+    width: 80px;
     height: auto;
     margin-right: 20px;
 }
@@ -327,7 +334,6 @@ footer {
     cursor: pointer;
 }
 
-
 #finalizar-compra {
     margin-top: 30px;
     padding: 15px 30px;
@@ -338,6 +344,8 @@ footer {
     font-size: 1.2em;
     cursor: pointer;
 }
+
+/* Sección Cotización */
 #cotizacion {
     padding: 50px 20px;
     background-color: #e8e8e8;
