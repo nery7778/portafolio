@@ -1,0 +1,505 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Simulador de Tiro Parabólico</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, Arial, sans-serif;
+      background: radial-gradient(circle at top, #1e293b 0, #020617 55%);
+      color: #e5e7eb;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      text-align: center;
+      padding: 16px 10px;
+      border-bottom: 1px solid #111827;
+    }
+    header h1 {
+      font-size: 1.6rem;
+      margin: 0;
+    }
+    header p {
+      margin: 6px 0 0;
+      color: #9ca3af;
+    }
+    .layout {
+      padding: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+    }
+    .panel {
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid #0f172a;
+      border-radius: 12px;
+      padding: 14px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.45);
+    }
+    .panel h2 {
+      font-size: 1rem;
+      margin: 0 0 8px;
+      border-bottom: 1px solid #1f2937;
+      padding-bottom: 4px;
+    }
+    .left-panel {
+      flex: 1 1 270px;
+      max-width: 320px;
+    }
+    .inputs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 14px;
+    }
+    label {
+      font-size: 0.85rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    input[type="number"] {
+      padding: 6px 8px;
+      border-radius: 6px;
+      border: 1px solid #374151;
+      background: #020617;
+      color: #e5e7eb;
+    }
+    input[type="number"]:focus {
+      border-color: #22c55e;
+      box-shadow: 0 0 0 1px #22c55e;
+      outline: none;
+    }
+    .btn-row {
+      margin: 12px 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    button {
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: 0.1s ease;
+    }
+    button:hover { transform: translateY(-1px); }
+    button:active { transform: translateY(0); }
+    .primary {
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      color: #022c22;
+    }
+    .secondary {
+      background: #0f172a;
+      color: #e5e7eb;
+      border: 1px solid #1f2937;
+    }
+    .warn {
+      background: #7f1d1d;
+      color: #fee2e2;
+      border: 1px solid #b91c1c;
+    }
+    .resultados p {
+      margin: 3px 0;
+      font-size: 0.8rem;
+    }
+    .badge {
+      margin-top: 6px;
+      font-size: 0.75rem;
+      background: #022c22;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid #064e3b;
+      color: #a7f3d0;
+    }
+    .canvas-panel {
+      flex: 1 1 480px;
+      max-width: 800px;
+    }
+    #canvasWrapper {
+      background: #020617;
+      border-radius: 10px;
+      padding: 10px;
+      border: 1px solid #0f172a;
+    }
+    canvas {
+      width: 100%;
+      background: #0f172a;
+      border-radius: 8px;
+    }
+    .trayectorias-info {
+      margin-top: 6px;
+      font-size: 0.75rem;
+      color: #9ca3af;
+    }
+    .color-box {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      display: inline-block;
+      margin-right: 5px;
+    }
+    footer {
+      margin-top: auto;
+      text-align: center;
+      padding: 10px;
+      color: #6b7280;
+      border-top: 1px solid #0b1120;
+      font-size: 0.75rem;
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <h1>Simulador avanzado de tiro parabólico</h1>
+  <p></p>
+</header>
+
+<div class="layout">
+  <!-- PANEL IZQUIERDO -->
+  <div class="panel left-panel">
+    <h2>Parámetros</h2>
+
+    <div class="inputs-grid">
+      <label>Velocidad inicial v₀ (m/s)
+        <input id="v0" type="number" value="20" step="0.1" />
+      </label>
+      <label>Ángulo θ (°)
+        <input id="angle" type="number" value="45" step="0.1" />
+      </label>
+      <label>Altura inicial y₀ (m)
+        <input id="y0" type="number" value="0" step="0.1" />
+      </label>
+      <label>Gravedad g (m/s²)
+        <input id="g" type="number" value="9.81" step="0.01" />
+      </label>
+    </div>
+
+    <div class="btn-row">
+      <button class="primary" id="btnSimular">Simular</button>
+      <button class="secondary" id="btnPlayPause">▶ Reproducir</button>
+      <button class="secondary" id="btnReset">Reiniciar</button>
+      <button class="secondary" id="btnGuardar">Guardar tiro</button>
+      <button class="warn" id="btnLimpiar">Limpiar</button>
+    </div>
+
+    <div id="resultados" class="resultados">
+      <h2>Resultados</h2>
+      <p>Ingresa valores y haz clic en <strong>Simular</strong>.</p>
+    </div>
+
+    <div class="badge">
+      Tip: Cambia g para simular la Luna (1.62 m/s²) o Marte (3.71 m/s²).
+    </div>
+  </div>
+
+  <!-- PANEL DERECHO -->
+  <div class="panel canvas-panel">
+    <h2>Trayectoria</h2>
+    <div id="canvasWrapper">
+      <canvas id="canvas" width="760" height="420"></canvas>
+    </div>
+
+    <div id="trayectoriasInfo" class="trayectorias-info">
+      No hay trayectorias guardadas.
+    </div>
+  </div>
+</div>
+<section style="max-width: 900px; margin: 16px auto; padding: 12px 16px; font-size: 0.85rem; line-height: 1.5; background: rgba(15,23,42,0.85); border-radius: 10px; border: 1px solid #1f2937;">
+  <h2 style="margin-top:0; font-size:1rem; border-bottom:1px solid #1f2937; padding-bottom:4px;">
+    Introducción y objetivos del proyecto
+  </h2>
+  <p>
+    Este simulador modela el <strong>tiro parabólico</strong>, es decir, el movimiento de un proyectil
+    sometido a una aceleración constante hacia abajo (la gravedad). La velocidad inicial se descompone
+    en una componente horizontal constante y una componente vertical que varía con el tiempo.
+  </p>
+  <p><strong>Objetivos:</strong></p>
+  <ul>
+    <li>Aplicar las ecuaciones de la cinemática con aceleración constante.</li>
+    <li>Visualizar de forma gráfica cómo cambian la trayectoria y el alcance al modificar los parámetros.</li>
+    <li>Relacionar la teoría de Física con una herramienta interactiva programada en JavaScript.</li>
+  </ul>
+</section>
+<section style="max-width: 900px; margin: 0 auto 16px; padding: 12px 16px; font-size: 0.85rem; line-height: 1.5; background: rgba(15,23,42,0.85); border-radius: 10px; border: 1px solid #1f2937;">
+  <h2 style="margin-top:0; font-size:1rem; border-bottom:1px solid #1f2937; padding-bottom:4px;">
+    Posibles aplicaciones del simulador
+  </h2>
+  <ul>
+    <li><strong>Educación:</strong> apoyo visual para explicar tiro parabólico en clases de Física.</li>
+    <li><strong>Deporte:</strong> analizar ángulos y velocidades de lanzamiento en fútbol, básquet, béisbol, etc.</li>
+    <li><strong>Videojuegos:</strong> diseño de trayectorias de proyectiles en motores gráficos 2D o 3D.</li>
+    <li><strong>Ingeniería:</strong> estudio preliminar de lanzamientos, alcances y alturas en prototipos o simulaciones.</li>
+  </ul>
+</section>
+<footer>
+Simulador de movimiento parabólico — Física + Matemáticas + Programación. <br>
+  Alumno: <strong>Fernando, Soto, Alexis, Nery </strong> — Física 1 con el poderosísimo profe Charly <strong>:D</strong>
+
+</footer>
+
+<script>
+  const canvas = document.getElementById("canvas");
+  const ctx = canvas.getContext("2d");
+
+  const v0Input = document.getElementById("v0");
+  const angleInput = document.getElementById("angle");
+  const y0Input = document.getElementById("y0");
+  const gInput = document.getElementById("g");
+
+  const btnSimular = document.getElementById("btnSimular");
+  const btnPlayPause = document.getElementById("btnPlayPause");
+  const btnReset = document.getElementById("btnReset");
+  const btnGuardar = document.getElementById("btnGuardar");
+  const btnLimpiar = document.getElementById("btnLimpiar");
+
+  const resultadosDiv = document.getElementById("resultados");
+  const trayectoriasInfo = document.getElementById("trayectoriasInfo");
+
+  let trayectoriaActual = null;
+  let trayectorias = [];
+  let animando = false;
+  let tAnim = 0;
+  let tMax = 0;
+  let lastTS = null;
+
+  const colores = ["#22c55e", "#38bdf8", "#eab308", "#f97316", "#ec4899", "#a855f7"];
+
+  // ==== FISICA ====
+  function calcularTrayectoria(v0, angleDeg, y0, g) {
+    const rad = angleDeg * Math.PI / 180;
+    const v0x = v0 * Math.cos(rad);
+    const v0y = v0 * Math.sin(rad);
+
+    const a = -0.5 * g;
+    const b = v0y;
+    const c = y0;
+
+    const disc = b*b - 4*a*c;
+    if (disc < 0) return null;
+    const t1 = (-b + Math.sqrt(disc)) / (2*a);
+    const t2 = (-b - Math.sqrt(disc)) / (2*a);
+    const tVuelo = Math.max(t1, t2);
+    if (tVuelo <= 0) return null;
+
+    const alcance = v0x * tVuelo;
+    const tH = v0y / g;
+    let yMax;
+    if (tH > 0 && tH < tVuelo) {
+      yMax = y0 + v0y*tH - 0.5*g*tH*tH;
+    } else {
+      yMax = Math.max(y0, 0);
+    }
+
+    const puntos = [];
+    const pasos = 250;
+    for (let i = 0; i <= pasos; i++) {
+      const t = tVuelo * (i/pasos);
+      const x = v0x*t;
+      const y = y0 + v0y*t - 0.5*g*t*t;
+      if (y < 0) break;
+      puntos.push({ t, x, y });
+    }
+
+    return { v0, angleDeg, y0, g, v0x, v0y, tVuelo, alcance, yMax, puntos };
+  }
+
+  // ==== BOTONES ====
+  btnSimular.onclick = () => {
+    const v0 = parseFloat(v0Input.value);
+    const angle = parseFloat(angleInput.value);
+    const y0 = parseFloat(y0Input.value);
+    const g = parseFloat(gInput.value);
+
+    const datos = calcularTrayectoria(v0, angle, y0, g);
+    if (!datos) {
+      alert("Parámetros inválidos.");
+      return;
+    }
+
+    trayectoriaActual = datos;
+    tAnim = 0;
+    tMax = datos.tVuelo;
+    animando = false;
+    btnPlayPause.textContent = "▶ Reproducir";
+
+    mostrarResultados(datos);
+    dibujarEscena(0);
+  };
+
+  btnPlayPause.onclick = () => {
+    if (!trayectoriaActual) return;
+    if (!animando) {
+      animando = true;
+      btnPlayPause.textContent = "⏸ Pausar";
+      lastTS = null;
+      requestAnimationFrame(loop);
+    } else {
+      animando = false;
+      btnPlayPause.textContent = "▶ Reproducir";
+    }
+  };
+
+  btnReset.onclick = () => {
+    tAnim = 0;
+    animando = false;
+    btnPlayPause.textContent = "▶ Reproducir";
+    dibujarEscena(0);
+  };
+
+  btnGuardar.onclick = () => {
+    if (!trayectoriaActual) return;
+    if (trayectorias.length >= colores.length) {
+      alert("Máximo de trayectorias guardadas.");
+      return;
+    }
+    trayectorias.push(trayectoriaActual);
+    actualizarListaTrayectorias();
+    dibujarEscena(tAnim/tMax);
+  };
+
+  btnLimpiar.onclick = () => {
+    trayectorias = [];
+    actualizarListaTrayectorias();
+    dibujarEscena(tAnim/tMax);
+  };
+
+  // ==== ANIMACION ====
+  function loop(ts) {
+    if (!animando) return;
+    if (!lastTS) lastTS = ts;
+    const dt = (ts - lastTS)/1000;
+    lastTS = ts;
+
+    tAnim += dt;
+    if (tAnim >= tMax) {
+      tAnim = tMax;
+      animando = false;
+      btnPlayPause.textContent = "▶ Reproducir";
+    }
+    dibujarEscena(tAnim/tMax);
+    if (animando) requestAnimationFrame(loop);
+  }
+
+  // ==== DIBUJADO ====
+  function dibujarEscena(fr) {
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    dibujarEjes();
+
+    trayectorias.forEach((t,i) => {
+      dibujarCompleta(t, colores[i], 1.5);
+    });
+
+    if (trayectoriaActual) {
+      dibujarCompleta(trayectoriaActual, "#22c55e", 2);
+      const p = puntoEnTiempo(trayectoriaActual, trayectoriaActual.tVuelo * fr);
+      if (p) dibujarProyectil(p);
+    }
+  }
+
+  function dibujarEjes() {
+    const m = 40, w = canvas.width, h = canvas.height;
+    ctx.strokeStyle = "#475569";
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(m, h-m);
+    ctx.lineTo(w-m, h-m);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(m, h-m);
+    ctx.lineTo(m, m);
+    ctx.stroke();
+  }
+
+  function getEscala(t) {
+    const m = 40, w = canvas.width, h = canvas.height;
+    let maxX = 0, maxY = 0;
+    t.puntos.forEach(p => { if(p.x>maxX) maxX=p.x; if(p.y>maxY) maxY=p.y; });
+    return {
+      m,
+      ex: (w - 2*m) / maxX,
+      ey: (h - 2*m) / (maxY*1.1)
+    };
+  }
+
+  function dibujarCompleta(t, color, width) {
+    const { m, ex, ey } = getEscala(t);
+    const h = canvas.height;
+
+    ctx.strokeStyle = color;
+    ctx.lineWidth = width;
+    ctx.beginPath();
+
+    t.puntos.forEach((p, idx) => {
+      const x = m + p.x*ex;
+      const y = h-m - p.y*ey;
+      if (idx === 0) ctx.moveTo(x,y);
+      else ctx.lineTo(x,y);
+    });
+    ctx.stroke();
+  }
+
+  function puntoEnTiempo(t, tiempo) {
+    const pts = t.puntos;
+    for (let i = 0; i < pts.length-1; i++) {
+      if (tiempo >= pts[i].t && tiempo <= pts[i+1].t) {
+        const f = (tiempo - pts[i].t) / (pts[i+1].t - pts[i].t);
+        return {
+          x: pts[i].x + f*(pts[i+1].x - pts[i].x),
+          y: pts[i].y + f*(pts[i+1].y - pts[i].y)
+        };
+      }
+    }
+    return pts[pts.length-1];
+  }
+
+  function dibujarProyectil(p) {
+    const { m, ex, ey } = getEscala(trayectoriaActual);
+    const h = canvas.height;
+    const x = m + p.x*ex;
+    const y = h-m - p.y*ey;
+
+    ctx.beginPath();
+    ctx.arc(x, y, 6, 0, Math.PI*2);
+    ctx.fillStyle = "#fbbf24";
+    ctx.fill();
+  }
+
+  function mostrarResultados(t) {
+    resultadosDiv.innerHTML = `
+      <h2>Resultados</h2>
+      <p><strong>Tiempo de vuelo:</strong> ${t.tVuelo.toFixed(2)} s</p>
+      <p><strong>Alcance máximo:</strong> ${t.alcance.toFixed(2)} m</p>
+      <p><strong>Altura máxima:</strong> ${t.yMax.toFixed(2)} m</p>
+      <p><strong>v₀x:</strong> ${t.v0x.toFixed(2)} m/s</p>
+      <p><strong>v₀y:</strong> ${t.v0y.toFixed(2)} m/s</p>
+    `;
+  }
+
+  function actualizarListaTrayectorias() {
+    if (trayectorias.length === 0) {
+      trayectoriasInfo.textContent = "No hay trayectorias guardadas.";
+      return;
+    }
+    let html = "";
+    trayectorias.forEach((t,i) => {
+      html += `
+        <div><span class="color-box" style="background:${colores[i]}"></span>
+        v₀=${t.v0.toFixed(1)} m/s, θ=${t.angleDeg.toFixed(1)}°</div>`;
+    });
+    trayectoriasInfo.innerHTML = html;
+  }
+
+  dibujarEscena(0);
+</script>
+
+</body>
+</html>
